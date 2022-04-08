@@ -1,0 +1,45 @@
+@font-face {
+    font-family: eczar;
+    src: url(../fonts/eczar/Eczar-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/roboto/Roboto-Regular.ttf);
+}
+
+body {
+    margin: 0;
+    font-family: 'roboto';
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    text-decoration: none;
+    background-color: rgb(103, 94, 243);
+    color: white;
+    font-size: 22px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: block;
+    margin: 10px 0;
+}
+
+.links {
+    text-align: center;
+    margin-left: 10%;
+}
+
+.backgroung-img {
+    margin-top: 320px;
+    height: 510px;
+    opacity: 0.5;
+}
+
+.btn:hover {
+    background-color: rgb(59, 51, 175);
+}
