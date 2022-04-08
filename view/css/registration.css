@@ -1,0 +1,21 @@
+.inline {
+    display: inline;
+}
+
+.required {
+    color: red;
+}
+
+.main-page {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.backgroung-img-login {
+    position: absolute;
+    z-index: -1;
+    margin-top: 168px;
+    margin-left: 1000px;
+    height: 720px;
+    opacity: 0.5;
+}
