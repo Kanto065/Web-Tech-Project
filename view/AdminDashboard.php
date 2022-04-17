@@ -50,7 +50,7 @@ error_reporting(E_ERROR | E_PARSE);
                     <a href="">Change Password</a>
                 </div>
             </div>
-            <a class="nav-link logout" href="">Log out</a>
+            <a onclick="logout" class="nav-link logout" href="">Log out</a>
         </div>
     </nav>
 

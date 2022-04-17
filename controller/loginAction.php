@@ -1,82 +1,74 @@
-<?php 
-	session_start();
+<?php
+session_start();
+require '../model/admin_data_access.php';
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Log in form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log in form</title>
 </head>
+
 <body>
-	
-	<?php
 
-		$uname = $unameErr = $pass = $passErr = $arr1 = $x = '';
+    <?php
 
-		if ($_SERVER["REQUEST_METHOD"] === "POST"){
-            function sanitize($data){
-                $data = trim($data);
-				$data = stripslashes($data);
-				$data = htmlspecialchars($data);
-				return $data;
-            }
+	$email = $emailErr = $pass = $passErr = $err = $arr1 = $flag = '';
 
-            if(empty($_POST['uname'])){
-                $unameErr = "* user name required.";
-            }
-            else{
-                $uname = sanitize($_POST['uname']);
+	if ($_SERVER["REQUEST_METHOD"] === "POST") {
+		function sanitize($data)
+		{
+			$data = trim($data);
+			$data = stripslashes($data);
+			$data = htmlspecialchars($data);
+			return $data;
+		}
 
-                $handle = fopen("../content/admin.json", "r");
-            	$fr = fread($handle, filesize("../content/admin.json"));
 
-            	$arr1 = json_decode($fr);
-            	//$lastIndex = count($arr1);
+		if (empty($_POST['email'])) {
+			$emailErr = "* email required.";
+			$flag = 0;
+		} else {
+			$email = sanitize($_POST['email']);
+			$flag = 1;
+		}
+		if (empty($_POST['pass'])) {
+			$passErr = "* password required.";
+			$flag = 0;
+		} else {
+			$pass = sanitize($_POST['pass']);
+			$flag = 1;
+		}
+		if ($flag == 1) {
+			if (login($email, $pass)) {
+				setcookie('flag', 'true', time() + 3600, '/');
+				session_destroy();
+				header("Location: ../view/AdminDashboard.php");
+				exit();
+			} else {
+				$err = "* email/ pass invalid.";
+				$_SESSION['err'] = $err;
+				header("Location: ../view/logIn.php");
+				exit();
+			}
+		} else if ($emailErr || $passErr) {
+			$_SESSION['emailErr'] = $emailErr;
+			$_SESSION['passErr'] = $passErr;
+			header("Location: ../view/logIn.php");
+			exit();
+		}
 
-            	$fc = fclose($handle);
 
-            	for($i=0; $i<count($arr1); $i++){
-            		//echo $arr1[$i]->uname . " " . $arr1[$i]->pass;
-            		if($arr1[$i]->uname === $uname){
-            			echo $arr1[$i]->uname . " " . $arr1[$i]->pass;
-            			$x = $i;
-
-            			//setting cookie
-            			setcookie("uname",$uname,time()+60*60*7, '/');
-            			$unameErr = '';
-            			break;
-            		}
-            		else{
-            			$unameErr = "* invalid user name.";
-            		} 
-            	}
-            }
-
-            if(empty($_POST['pass'])){
-                $passErr = "* password required.";
-            }
-            else{
-                $pass = sanitize($_POST['pass']);
-                if($arr1[$x]->pass !== $pass){
-                	$passErr = "* password invalid.";
-                }
-            }
-
-            if ($unameErr || $passErr){
-            	$_SESSION['unameErr'] = $unameErr;
-                $_SESSION['passErr'] = $passErr;
-                header("Location: ../view/logIn.php");
-                exit();
-            }
-            else{
-            	session_destroy();
-            	echo "from else";
-            	header("Location: ../view/AdminDashboard.php");
-                exit();
-            }
-        }
+		// } else {
+		// 	session_destroy();
+		// 	header("Location: ../view/AdminDashboard.php");
+		// 	exit();
+		// }
+	}
 	?>
 
 </body>
+
 </html>

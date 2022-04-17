@@ -15,8 +15,8 @@ error_reporting(E_ERROR | E_PARSE);
 
 <body>
     <?php
-	include '../view/common/header.php';
-	?>
+    include '../view/common/header.php';
+    ?>
 
     <section class="main-page">
 
@@ -37,6 +37,7 @@ error_reporting(E_ERROR | E_PARSE);
                 <p class="password label">Password </p>
                 <input class="input-field" type="password" id="pass" name="pass" minlength="8">
                 <?php echo $_SESSION['passErr'] ?>
+                <?php echo $_SESSION['err'] ?>
                 <br>
                 <input class="login-btn btn" type="submit" value="Log in">
                 <a class="forgot-pass" href="../controller/forgetPass.php">Forgotten Password?</a>
@@ -51,9 +52,9 @@ error_reporting(E_ERROR | E_PARSE);
     </section>
 
     <?php
-	$_SESSION['unameErr'] = $_SESSION['passErr'] = '';
-	include '../view/common/footer.php';
-	?>
+    $_SESSION['unameErr'] = $_SESSION['passErr'] = '';
+    include '../view/common/footer.php';
+    ?>
 </body>
 
 </html>
