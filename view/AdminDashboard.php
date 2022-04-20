@@ -7,6 +7,7 @@ error_reporting(E_ERROR | E_PARSE);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- stylesheet -->
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/nav.css">
     <title>Admin Dashboard</title>
@@ -16,13 +17,10 @@ error_reporting(E_ERROR | E_PARSE);
 
     <?php
 
-    // if (!isset($_COOKIE['uname'])) {
-    // 	header("Location: ../view/logIn.php");
-    // 	exit();
-    // }
-    // include '../view/common/menu.php';
-
-    // echo '<h2 style="text-align: right"> welcome ' . $_COOKIE['uname'] . '</h2>';
+    if (!isset($_COOKIE['flag'])) {
+        header("Location: ../view/logIn.php");
+        exit();
+    }
     ?>
 
     <nav class="navigation">
@@ -45,20 +43,18 @@ error_reporting(E_ERROR | E_PARSE);
             <div class="dropdown">
                 <button class="dropbtn nav-link">Profile</button>
                 <div class="dropdown-content">
-                    <a href="">View Profile</a>
-                    <a href="">Edit Profile</a>
-                    <a href="">Change Password</a>
+                    <a href="../view/viewProfile.php">View Profile</a>
+                    <a href="../view/updateProfileInfo.php">Edit Profile</a>
+                    <a href="../view/changePassword.php">Change Password</a>
                 </div>
             </div>
-            <a onclick="logout" class="nav-link logout" href="">Log out</a>
+            <a class="nav-link logout" href="../controller/logOut.php">Log out</a>
         </div>
     </nav>
 
 
 
-    <form>
-        <button type="submit" formaction="../view/driverList.php">Approve/decline Drivers reg </button>
-    </form>
+    
 
     <?php
     include '../view/common/footer.php';

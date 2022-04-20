@@ -8,8 +8,11 @@ error_reporting(E_ERROR | E_PARSE);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- stylesheet -->
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/logIn.css">
+    <!-- js -->
+    <script src="./js/main.js"></script>
     <title>Log in form</title>
 </head>
 
@@ -31,11 +34,13 @@ error_reporting(E_ERROR | E_PARSE);
 
 
         <div class="form-div">
-            <form action="../controller/loginAction.php" method="post" novalidate>
+            <form action="../controller/loginAction.php" method="post" novalidate
+                onsubmit="return emptyInputFieldforlogin()">
                 <p class="email label">Email </p>
-                <input class="input-field" type="text" id="email" name="email"><?php echo $_SESSION['emailErr'] ?><br>
+                <input class="input-field input-field-required" type="text" id="email"
+                    name="email"><?php echo $_SESSION['emailErr'] ?><br>
                 <p class="password label">Password </p>
-                <input class="input-field" type="password" id="pass" name="pass" minlength="8">
+                <input class="input-field input-field-required" type="password" id="pass" name="pass" minlength="8">
                 <?php echo $_SESSION['passErr'] ?>
                 <?php echo $_SESSION['err'] ?>
                 <br>
@@ -44,8 +49,11 @@ error_reporting(E_ERROR | E_PARSE);
                 <br>
                 <hr>
                 <p class="new-admin-label">New Admin? register instead</p>
-                <button class="register-btn btn" type="submit" formaction="../view/registration.php">Register</button>
 
+
+            </form>
+            <form action="">
+                <button class="register-btn btn" type="submit" formaction="../view/registration.php">Register</button>
             </form>
         </div>
 

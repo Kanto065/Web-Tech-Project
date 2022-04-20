@@ -85,7 +85,6 @@ require '../model/admin_data_access.php';
             }
         }
 
-        //echo $pass . "\n" . $cpass . "\n";
 
         /*$_SESSION['firstName'] = $firstName;
             $_SESSION['lastName'] = $lastName;
@@ -105,6 +104,8 @@ require '../model/admin_data_access.php';
             $_SESSION['emailErr'] = $emailErr;
             $_SESSION['passErr'] = $passErr;
             $_SESSION['cpassErr'] = $cpassErr;
+
+            // $_SESSION['email'] = $email;
 
             header("Location: ../view/registration.php");
             exit();

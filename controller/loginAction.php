@@ -44,7 +44,7 @@ require '../model/admin_data_access.php';
 		if ($flag == 1) {
 			if (login($email, $pass)) {
 				setcookie('flag', 'true', time() + 3600, '/');
-				session_destroy();
+				$_SESSION['email'] = $email;
 				header("Location: ../view/AdminDashboard.php");
 				exit();
 			} else {
